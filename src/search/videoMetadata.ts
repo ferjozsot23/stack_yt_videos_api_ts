@@ -11,7 +11,6 @@ async function getVideosMetadata(): Promise<Video[]> {
             part: ["snippet,statistics"],
             id: videosIdArray,
         })
-
         if (response.data.items) {
             const videosMetadata = response.data.items.map(
                 ({ id, snippet, statistics }) => ({

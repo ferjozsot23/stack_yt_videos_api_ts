@@ -1,4 +1,4 @@
-import client from "../api/client.js"
+import client from "../api/client.ts"
 import {
     CHANNEL_ID,
     MAX_RESULTS,
@@ -6,7 +6,7 @@ import {
     FIELDS,
     TYPE,
     VIDEO_DURATION,
-} from "../utils/constants.js"
+} from "../utils/constants.ts"
 
 async function getVideosId(): Promise<string[]> {
     try {

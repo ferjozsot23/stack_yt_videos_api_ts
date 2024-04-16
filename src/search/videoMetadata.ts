@@ -1,13 +1,12 @@
 import getVideosId from "./videoId.ts"
 import client from "../api/client.ts"
 import { Video } from "../models/Video.ts"
-
 import { VideoSchema } from "../schema/VideoSchema.ts"
 
 async function getVideosMetadata(): Promise<Video[]> {
-    const videosIdArray = await getVideosId()
-
+    
     try {
+        const videosIdArray = await getVideosId()
         const response = await client.videos.list({
             part: ["snippet,statistics"],
             id: videosIdArray,

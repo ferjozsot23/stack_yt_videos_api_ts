@@ -10,13 +10,17 @@
     "author": "ferjozsot23",
     "license": "ISC",
     "devDependencies": {
+        "@types/chai": "^4.3.14",
+        "@types/jest": "^29.5.12",
         "@types/node": "^20.12.7",
+        "chai": "^5.1.0",
         "dotenv": "^16.4.5",
         "ts-node": "^10.9.2",
         "typescript": "^5.4.5"
     },
     "dependencies": {
         "googleapis": "^134.0.0",
+        "tsc-node": "^0.0.3",
         "zod": "^3.22.4"
     }
 }

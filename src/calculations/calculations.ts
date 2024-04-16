@@ -27,7 +27,7 @@ const getTotalLikes = (data: Video[]) =>
               (total: number, video: Video) => total + video.likeCount,
               0
           )
-        : []
+        : 0
 
 const getTopViewedVideos = (data: Video[]) =>
     Array.isArray(data) && data

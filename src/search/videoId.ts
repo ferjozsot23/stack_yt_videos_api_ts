@@ -23,7 +23,7 @@ async function getVideosId(): Promise<string[]> {
                   .map((item) => item.id?.videoId)
                   .filter((videoId) => typeof videoId === "string") as string[])
             : []
-    } catch (err) {
+    } catch (err: any) {
         throw new Error("Error fetching videos from the API: " + err.message)
     }
 }

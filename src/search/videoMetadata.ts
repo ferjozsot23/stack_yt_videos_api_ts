@@ -29,7 +29,7 @@ async function getVideosMetadata(): Promise<Video[]> {
         } else {
             return []
         }
-    } catch (err) {
+    } catch (err: any) {
         throw new Error("Error fetching videos metadata: " + err.message)
     }
 }

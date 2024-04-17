@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "googleapis": "^134.0.0",
-    "tsc-node": "^0.0.3",
+    "tsc-node": "^0.0.2",
     "zod": "^3.22.4"
   }
 }

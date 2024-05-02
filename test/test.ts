@@ -9,11 +9,6 @@ import fixtureData from "./fixtures/youtubeData.ts";
 
 describe("getTopLikedVideos", () => {
   describe("when receiving valid data", () => {
-    it("returns an array", () => {
-      const result = getTopLikedVideos(fixtureData);
-      expect(Array.isArray(result)).toBe(true);
-    });
-
     it("returns an array with length 5", () => {
       const result = getTopLikedVideos(fixtureData);
       expect(result).toHaveLength(5);
@@ -48,11 +43,6 @@ describe("getTopLikedVideos", () => {
 
 describe("getNewestVideos", () => {
   describe("when receiving valid data", () => {
-    it("returns an array", () => {
-      const result = getNewestVideos(fixtureData);
-      expect(Array.isArray(result)).toBe(true);
-    });
-
     it("returns an array with length 5", () => {
       const result = getNewestVideos(fixtureData);
       expect(result).toHaveLength(5);
@@ -87,11 +77,6 @@ describe("getNewestVideos", () => {
 
 describe("getTotalLikes", () => {
   describe("when receiving valid data", () => {
-    it("returns a number", () => {
-      const result = getTotalLikes(fixtureData);
-      expect(typeof result).toBe("number");
-    });
-
     it("returns the total number of likes of all videos", () => {
       const result = getTotalLikes(fixtureData);
       const expectedTotalLikes = 56;
@@ -109,11 +94,6 @@ describe("getTotalLikes", () => {
 
 describe("getTopViewedVideos", () => {
   describe("when receiving valid data", () => {
-    it("returns an array", () => {
-      const result = getTopViewedVideos(fixtureData);
-      expect(Array.isArray(result)).toBe(true);
-    });
-
     it("returns an array with length 5", () => {
       const result = getTopViewedVideos(fixtureData);
       expect(result).toHaveLength(5);

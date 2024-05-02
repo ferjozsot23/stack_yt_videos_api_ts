@@ -6,8 +6,6 @@ dotenv.config();
 const API_KEY = process.env.YOUTUBE_API_KEY;
 const API_VERSION = "v3";
 
-console.log(API_KEY);
-
 const client = google.youtube({
   version: API_VERSION,
   auth: API_KEY,

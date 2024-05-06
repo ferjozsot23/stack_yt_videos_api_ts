@@ -8,26 +8,13 @@ import { Video } from "./src/models/Video.ts";
 import getVideosMetadata, {
   VideoMetadataError,
 } from "./src/search/videoMetadata.ts";
-
+import { handleVideoMetadataError } from "./src/errorHandle/switchErrors.ts";
 async function main() {
   const stackbuildersVideoData: Video[] | VideoMetadataError =
     await getVideosMetadata();
-
+  
   if ("type" in stackbuildersVideoData) {
-    switch (stackbuildersVideoData.type) {
-      case "network":
-        console.error(
-          "Network error occurred:",
-          stackbuildersVideoData.message
-        );
-        break;
-      case "parsing":
-        console.error(
-          "Parsing error occurred:",
-          stackbuildersVideoData.message
-        );
-        break;
-    }
+    handleVideoMetadataError(stackbuildersVideoData);
   } else {
     const topLikedVideos = getTopLikedVideos(stackbuildersVideoData);
     const newestVideos = getNewestVideos(stackbuildersVideoData);

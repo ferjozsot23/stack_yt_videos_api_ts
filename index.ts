@@ -4,12 +4,31 @@ import {
   getTotalLikes,
   getTopViewedVideos,
 } from "./src/calculations/calculations.ts";
-import getVideosMetadata from "./src/search/videoMetadata.ts";
+import { Video } from "./src/models/Video.ts";
+import getVideosMetadata, {
+  VideoMetadataError,
+} from "./src/search/videoMetadata.ts";
 
 async function main() {
-  try {
-    const stackbuildersVideoData = await getVideosMetadata();
+  const stackbuildersVideoData: Video[] | VideoMetadataError =
+    await getVideosMetadata();
 
+  if ("type" in stackbuildersVideoData) {
+    switch (stackbuildersVideoData.type) {
+      case "network":
+        console.error(
+          "Network error occurred:",
+          stackbuildersVideoData.message
+        );
+        break;
+      case "parsing":
+        console.error(
+          "Parsing error occurred:",
+          stackbuildersVideoData.message
+        );
+        break;
+    }
+  } else {
     const topLikedVideos = getTopLikedVideos(stackbuildersVideoData);
     const newestVideos = getNewestVideos(stackbuildersVideoData);
     const totalLikes = getTotalLikes(stackbuildersVideoData);
@@ -19,8 +38,6 @@ async function main() {
     console.log("Top 5 newest videos:", newestVideos);
     console.log("Total likes:", totalLikes);
     console.log("Top 5 viewed videos:", topViewedVideos);
-  } catch (error) {
-    console.error("Error retrieving videos metadata.", error);
   }
 }
 

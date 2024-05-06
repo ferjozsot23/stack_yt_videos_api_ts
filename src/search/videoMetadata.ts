@@ -5,7 +5,9 @@ import { VideoSchema } from "../schema/VideoSchema.ts";
 import { getErrorMessage } from "../errorHandle/errorMessage.ts";
 import { ApiError, ParsingError } from "../errorHandle/errorTypes.ts";
 
-async function getVideosMetadata(): Promise<Video[]> {
+export type VideoMetadataError = ApiError | ParsingError
+
+async function getVideosMetadata(): Promise<Video[] | VideoMetadataError> {
   try {
     const videosIdArray = await getVideosId();
     const response = await client.videos.list({
@@ -32,7 +34,7 @@ async function getVideosMetadata(): Promise<Video[]> {
           type: "parsing",
           message: `Error parsing video metadata with Zod:  ${errorMessage}`,
         };
-        throw parsingError;
+        return parsingError;
       }
     } else {
       return [];
@@ -43,7 +45,7 @@ async function getVideosMetadata(): Promise<Video[]> {
       type: "network",
       message: `Error fetching metadata from the specified video IDs: ${errorMessage}`,
     };
-    throw metadataError;
+    return metadataError;
   }
 }
 

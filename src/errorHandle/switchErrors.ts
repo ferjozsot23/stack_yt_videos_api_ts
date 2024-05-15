@@ -1,4 +1,4 @@
-import { VideoMetadataError } from "../search/videoMetadata";
+import { VideoMetadataError } from "../errorHandle/errorTypes";
 
 export function handleVideoMetadataError(error: VideoMetadataError): void {
     switch (error.type) {
@@ -13,3 +13,5 @@ export function handleVideoMetadataError(error: VideoMetadataError): void {
         break;
     }
   }
+
+  

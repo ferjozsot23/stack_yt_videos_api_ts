@@ -8,5 +8,6 @@ type ParsingError = {
   message: string;
 };
 
+type VideoMetadataError = ApiError | ParsingError
 
-export { ApiError, ParsingError };
+export { ApiError, ParsingError, VideoMetadataError };

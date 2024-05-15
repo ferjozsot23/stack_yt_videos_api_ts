@@ -7,11 +7,11 @@ import {
   TYPE,
   VIDEO_DURATION,
 } from "../utils/constants.ts";
-import { ApiError, ParsingError } from "../errorHandle/errorTypes.ts";
-import { getErrorMessage } from "../errorHandle/errorMessage.ts";
+import { VideoMetadataError } from "../errorHandle/errorTypes.ts";
 import { VideosIdSchema } from "../schema/VideosIdSchema.ts";
+import { toMetadataError, toParsingError } from "../errorHandle/errorReturn.ts";
 
-async function getVideosId(): Promise<string[]> {
+async function getVideosId(): Promise<string[] | VideoMetadataError> {
   try {
     const response = await client.search.list({
       part: PART,
@@ -30,24 +30,11 @@ async function getVideosId(): Promise<string[]> {
         VideosIdSchema.parse(videoId)
       );
       return validatedVideosId;
-      
-      // Posible error parsing
     } catch (error: unknown) {
-      const errorMessage = getErrorMessage(error);
-      const parsingError: ParsingError = {
-        type: "parsing",
-        message: `Error parsing video metadata with Zod:  ${errorMessage}`,
-      };
-      throw parsingError;
+      return toParsingError(error);
     }
-    // Posible error fetching API
-  } catch (err: unknown) {
-    const errorMessage = getErrorMessage(err);
-    const videosIdError: ApiError = {
-      type: "network",
-      message: `Error fetching videos from the API for the specified channel ID: ${errorMessage}`,
-    };
-    throw videosIdError;
+  } catch (error: unknown) {
+    return toMetadataError(error);
   }
 }
 

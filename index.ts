@@ -5,14 +5,13 @@ import {
   getTopViewedVideos,
 } from "./src/calculations/calculations.ts";
 import { Video } from "./src/models/Video.ts";
-import getVideosMetadata, {
-  VideoMetadataError,
-} from "./src/search/videoMetadata.ts";
+import getVideosMetadata from "./src/search/videoMetadata.ts";
+import { VideoMetadataError } from "./src/errorHandle/errorTypes.ts";
 import { handleVideoMetadataError } from "./src/errorHandle/switchErrors.ts";
+
 async function main() {
   const stackbuildersVideoData: Video[] | VideoMetadataError =
     await getVideosMetadata();
-  
   if ("type" in stackbuildersVideoData) {
     handleVideoMetadataError(stackbuildersVideoData);
   } else {

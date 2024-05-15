@@ -6,6 +6,6 @@ export const getErrorMessage = (error: unknown): string => {
   } else if (typeof error == "string") {
     return error;
   } else {
-    return " Unknow error";
+    return "Unknow error";
   }
 };
